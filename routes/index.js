@@ -3,12 +3,14 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', name: 'MBMeftahi'});
+  res.render('index', { 
+    title: 'Express Project with pug',
+    name: 'MBMeftahi'
+  });
 });
 
-//router.get('/', function(req, res) {
-//  res.send('respond with a resource');
-//  //console.log(config);
-//});
+router.get('/logout', function(req, res){
+  req.logout();
+});
 
 module.exports = router;
