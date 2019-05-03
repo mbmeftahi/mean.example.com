@@ -9,3 +9,11 @@ mongo
 npm install mongoose
 -- install validator for db connection
 npm install mongoose-unique-validator
+
+
+bootcamp/13-Express/04-AuthAPI.md
+npm install passport
+npm install passport-local
+npm install passport-local-mongoose
+npm install express-session
+npm install connect-mongo
