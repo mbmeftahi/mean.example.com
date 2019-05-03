@@ -5,3 +5,6 @@ bootcamp/13-Express/03-RESTAPI.md
 sudo service mongod start
 mongo
 
+--installing mangoose for mango db connection.
+npm install mongoose
+
