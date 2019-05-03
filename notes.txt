@@ -7,4 +7,5 @@ mongo
 
 --installing mangoose for mango db connection.
 npm install mongoose
-
+-- install validator for db connection
+npm install mongoose-unique-validator
