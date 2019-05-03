@@ -1,0 +1,7 @@
+
+working on:
+02-Express.md
+bootcamp/13-Express/03-RESTAPI.md
+sudo service mongod start
+mongo
+
