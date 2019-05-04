@@ -1,6 +1,8 @@
 //Register a new user
 var express = require('express');
 var router = express.Router();
+var passport = require('passport');
+
 var Users = require('../../models/users');
 
 router.post('/register', function(req,res,next){
@@ -36,8 +38,9 @@ router.post('/register', function(req,res,next){
 
 router.post('/login', function(req, res, next) {
     //
+    
     passport.authenticate('local', function(err, user, info) {
-  
+      console.log("123")
       if (err) { 
         return res.json({success:false, error: err});
       }
@@ -60,5 +63,12 @@ router.post('/login', function(req, res, next) {
       });
     })(req, res, next);
 });
+
+router.get('/logout', function(req, res){
+  console.log(req.session);
+  req.logout();
+  console.log(req.session);
+});
+
 
 module.exports = router;
