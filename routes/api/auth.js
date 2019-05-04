@@ -37,10 +37,9 @@ router.post('/register', function(req,res,next){
 });
 
 router.post('/login', function(req, res, next) {
-    //
     
     passport.authenticate('local', function(err, user, info) {
-      console.log("123")
+      
       if (err) { 
         return res.json({success:false, error: err});
       }
@@ -64,10 +63,13 @@ router.post('/login', function(req, res, next) {
     })(req, res, next);
 });
 
-router.get('/logout', function(req, res){
-  console.log(req.session);
+router.delete('/logout', function(req, res){
   req.logout();
-  console.log(req.session);
+  if(!req.session.passport.user){
+    return res.json({success: 'true'});
+  }else{
+    return res.json({success: 'false'});
+  }
 });
 
 
