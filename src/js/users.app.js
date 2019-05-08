@@ -207,7 +207,7 @@ var usersApp = (function() {
                 </div>
             </div>
             <div>
-                <a href="#delete-${data.user._id}" class="text-danger">Delete</a>
+                <a href="#delete-${data.user._id}" class=" btn btn-lg btn-primary text-danger">Delete</a>
             </div>
             `;
           
@@ -319,6 +319,10 @@ var usersApp = (function() {
     }
 
     return{
+        deleteUser: function(id){
+            deleteUser(id);
+        },
+        
         load: function(){
             let hash = window.location.hash;
             let hashArray = hash.split('-');
@@ -345,13 +349,12 @@ var usersApp = (function() {
                 viewUsers();
                 break;
             }
-        },
-
-        deleteUser: function(id){
-          deleteUser(id);
-        }
+        }       
     }
   
 })();
   
 usersApp.load();
+window.addEventListener("hashchange", function(){
+    usersApp.load();
+  });

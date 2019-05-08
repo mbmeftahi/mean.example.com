@@ -9,15 +9,18 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var Users = require('./models/users');
-var apiAuthRouter = require('./routes/api/auth');
+
 var app = express();
+
+var Users = require('./models/users');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
 var apiUsersRouter = require('./routes/api/users');
 var apiAuthRouter = require('./routes/api/auth');
+var articlesRouter = require('./routes/articles');
+var apiArticlesRouter = require('./routes/api/articles');
 
 //Connect to MongoDB
 mongoose.connect(config.mongodb, { useNewUrlParser: true });
@@ -79,6 +82,19 @@ app.use(function(req,res,next){
   next();
 });
 
+//Set up CORS
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+  if ('OPTIONS' == req.method) {
+    res.send(200);
+  } else {
+    next();
+  }
+});
+
 
 //Session based access control
 app.use(function(req,res,next){
@@ -90,7 +106,8 @@ app.use(function(req,res,next){
   //exact matches.
   var whitelist = [
     '/',
-    '/auth'
+    '/auth',
+    '/articles'
   ];
 
   //req.url holds the current URL
@@ -105,7 +122,8 @@ app.use(function(req,res,next){
   //Allow access to dynamic end points
   var subs = [
     '/public/',
-    '/api/auth/'
+    '/api/auth/',
+    '/articles/'
   ];
 
   //The query string provides a partial URL match beginning
@@ -131,8 +149,10 @@ app.use(function(req,res,next){
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use('/articles', articlesRouter);
 app.use('/api/users', apiUsersRouter);
 app.use('/api/auth', apiAuthRouter);
+app.use('/api/articles', apiArticlesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
