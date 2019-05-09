@@ -99,16 +99,18 @@ app.use(function(req, res, next) {
 //Session based access control
 app.use(function(req,res,next){
   //Uncomment the following line to allow access to everything.
-  //return next();
+  return next();
+  usersRouter
+  articlesRouter
 
   //Allow any endpoint that is an exact match. The server does not
   //have access to the hash so /auth and /auth#xxx would bot be considered 
   //exact matches.
-  var whitelist = [
-    '/',
-    '/auth',
-    '/articles'
-  ];
+  //var whitelist = [
+  //  '/',
+  //  '/auth',
+  //  '/articles/'
+  //];
 
   //req.url holds the current URL
   //indexOf() returns the index of the matching array element

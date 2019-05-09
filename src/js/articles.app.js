@@ -28,6 +28,7 @@ var articlesApp = (function () {
               <a href="#view-${articles[i]['_id']}">${articles[i]['title']}</a>
             </td>
             <td>${articles[i]['description']}</td>
+            <td>${articles[i]['created']}</td>
             <td>`
               +
               (articles[i]['published'] ? `${articles[i]['published'].slice(0, 19).replace('T', ' ')}` : `No Publication Date Set`)
@@ -51,7 +52,8 @@ var articlesApp = (function () {
                 <tr>
                   <td>Title</td>
                   <td>Description</td>
-                  <td>Date Published</td>
+                  <td>Date Created</td>
+                  <td>Date Publish(ed)</td>
                 </tr>
               </thead>
               <tbody>${rows}</tbody>
